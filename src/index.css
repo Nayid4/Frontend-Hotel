@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  background-color: #101010;
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+div {
+  color: #f7f7f7;
+}
+.logo-main {
+  height: 40px;
+}
+/* .hotel-main{
+    height: 500px;
+} */
+.algo {
+  border-color: #3d3a50;
+}
+
+.shadow-custom {
+  -webkit-box-shadow: 0px 2px 4px rgba(88, 14, 246, 0.25);
+  box-shadow: 0px 2px 4px rgba(88, 14, 246, 0.25);
+}
+
+.shadow-custom-a {
+  box-shadow: 0px -2px 4px rgba(88, 14, 246, 0.25);
+}
+
+/* Estilo al pasar el cursor (hover) */
+.ef:hover {
+  transition: 0.2s;
+  transform: scale(1.05);
+}
