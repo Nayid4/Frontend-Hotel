@@ -92,6 +92,21 @@ export default function About(){
     return (
         <>
             {/*- - Titulo - -*/}
+            <Box>
+                <Typography
+                variant="h1"
+                color="primary"
+                component="div"
+                sx={{
+                    textAlign: "center",
+                    marginTop: 10,
+                    marginBottom: 10,
+                    fontSize: 50,
+                }}
+                >
+                Nosotros
+                </Typography>
+            </Box>
             {/*- - Contenido - -*/}
             <Container 
                 maxWidth="md"
@@ -100,28 +115,24 @@ export default function About(){
                 <Grid container spacing={3}>
                     {/*- - Introduccion- -*/}
                     <Grid item xs={12}>
-                        <Box sx={{ background: "", padding: 5}}>
-                            <div className=" flex justify-center ">
-                                <h1 className="text-morado-leo  font-bold text-[40px] ">
+                        <Box sx={{ background: "#191919", padding: 5}}>
+                            <Typography variant='h1' color= "primary" sx={{fontSize: 30, margin: 2, textAlign: 'center'}}>
                                 {informacion[0].nombre}
-                                </h1>
-                            </div>
+                            </Typography>
                             <Typography variant='p'>
                                 {informacion[0].descripcion}
                             </Typography>
-                            <img className='hotel-main flex items-center rounded-full mt-10' src="https://www.hotelscombined.es/himg/13/87/c8/expediav2-318610-b357ae-798932.jpg" alt=''/>
+                            <img className='hotel-main flex items-center rounded-full mt-10' src={imagen} alt=''/>
                         </Box>
                     </Grid>
 
                     {/*- - Recorrido para mostrar la mision y la vision - -*/}
                     {informacion.slice(1).map((i) => (
                         <Grid key={i.nombre} item xs={6}>
-                            <Box sx={{ background: "", padding: 5, marginBottom: 3, height: 420}}>
-                                <div className=" flex justify-center ">
-                                    <h1 className="text-morado-leo  font-bold text-[40px] ">
+                            <Box sx={{ background: "#191919", padding: 5, marginBottom: 3, height: 420}}>
+                                <Typography variant='h1' color= "primary" sx={{fontSize: 30, margin: 2}}>
                                     {i.nombre}
-                                    </h1>
-                                </div>
+                                </Typography>
                                 <Typography variant='p'>
                                     {i.descripcion}
                                 </Typography>
@@ -132,11 +143,9 @@ export default function About(){
                     {/*- - Carrusel de trabajadores - -*/}
                     <Grid item xs={12}>
                         <Box sx={{padding: 5, marginBottom: 3}}>
-                            <div className=" flex justify-center ">
-                                <h1 className="text-morado-leo  font-bold text-[40px] ">
+                            <Typography variant='h1' color= "primary" sx={{fontSize: 30, margin: 2}}>
                                 Trabajadores
-                                </h1>
-                            </div>
+                            </Typography>
                             <Carousel showDots={true} responsive={responsive}>
                                 {empleados.map((info,i)=>(
                                     <Box key={i} sx={{marginRight: 5}}>

@@ -49,7 +49,7 @@ const Habitacion = ({bed, auth, activarAlerta,cambiarRoom}) => {
     const handleClick = () => {
         if(auth.auth === true){
             cambiarRoom(bed)
-            navigate("/reservar-habitacion")
+            navigate("/booking")
         }else{
             activarAlerta()
         }

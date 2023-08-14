@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Container, Skeleton, Stack  } from '@mui/material'
 
 
-export default function BookingUser(){
+export default function Profile(){
 
     return (
         <Container 

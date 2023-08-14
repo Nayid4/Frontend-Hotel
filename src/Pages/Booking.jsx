@@ -17,11 +17,10 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 import {DatePicker} from '@mui/x-date-pickers/DatePicker'
 import axios from "axios";
 import Alert from "../Components/Alert"
-import { useAuth } from "../context/AuthContext";
 
 
 function Booking({room, auth}) {
-    const {createReserva}=useAuth();
+
 
     // Estado para mostrar alerta
     const [alerta, setAlerta] = useState({
@@ -115,8 +114,8 @@ function Booking({room, auth}) {
         const updatedDatosReserva = {
             identificador: auth.userName,
             reservas: {
-              fechaIngreso:  new Date(DateInicio),
-              fechaSalida: new Date(DateFinal),
+              fechaIngreso:  1623628800001,
+              fechaSalida: 1623628800001,
               adultos: parseInt(adultos),
               niños: parseInt(ninos),
               habitacion: habitacion
@@ -130,7 +129,7 @@ function Booking({room, auth}) {
             pago: {
               titular: cardName,
               tarjeta: parseInt(cardNumber),
-              fechaVencimiento: new Date(DateVencimiento),
+              fechaVencimiento: 1623628800001,
               cvv: parseInt(cvv)
             },
             precio: room.precio
@@ -186,7 +185,7 @@ function Booking({room, auth}) {
                     fontSize: 50,
                 }}
                 >
-                Reservass
+                Reservas
                 </Typography>
                 
             </Box>

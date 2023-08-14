@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -7,11 +6,11 @@ import PasswordIcon from "@mui/icons-material/Lock";
 import EmailIcon from "@mui/icons-material/AlternateEmail";
 import imagen from "../assets/images/logo.png";
 import Checkbox from "@mui/material/Checkbox";
-import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useState, useEffect } from "react";
 import "../index.css";
+import axios from "axios";
 import { Alert, Snackbar, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function InputWithIcon() {
   const navigate = useNavigate();
@@ -44,11 +43,6 @@ export default function InputWithIcon() {
   };
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
-  //desde  context
-  const { registrarse} = useAuth();
-  // useEffect(() => {
-  //   if (isAutenticado) navigate("/");
-  // }, [isAutenticado]);
 
   // formulario funcion
   const manejarFormulario = async (evento) => {
@@ -72,8 +66,12 @@ export default function InputWithIcon() {
       message: "",
     });
     try {
-      registrarse(usuario);
-      console.log("user: ",usuario);
+      const respuesta = await axios({
+        method: "POST",
+        url: "http://localhost:4000/api/registrarse  ",
+        data: usuario,
+      });
+      console.log("res:", respuesta.data);
 
       // Se cambia el estado de la alerta
       setAlerta({
@@ -90,10 +88,12 @@ export default function InputWithIcon() {
         texto: "Error al verificar los datos",
       });
     }
+    // console.log(usuario);
   };
   // capturando usuario
   const manejarCambios = (evento) => {
     setUsuario({ ...usuario, [evento.target.name]: evento.target.value });
+    // console.log(evento.name, evento.target.value);
   };
   return (
     <div className="flex justify-center">
@@ -105,8 +105,8 @@ export default function InputWithIcon() {
           <img className="h-10" src={imagen} alt="" />
         </div>
         <form onSubmit={manejarFormulario}>
-          <h1 className="text-morado-leo font-bold flex justify-center text-[20px] ">
-            Sing Up
+          <h1 className="text-morado-leo flex justify-center text-[17px] ">
+            Registrarse
           </h1>
 
           {/*- - Nombre de usuario - -*/}
