@@ -6,11 +6,11 @@ import PasswordIcon from "@mui/icons-material/Lock";
 import EmailIcon from "@mui/icons-material/AlternateEmail";
 import imagen from "../assets/images/logo.png";
 import Checkbox from "@mui/material/Checkbox";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../index.css";
 import axios from "axios";
 import { Alert, Snackbar, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function InputWithIcon() {
   const navigate = useNavigate();
@@ -35,6 +35,7 @@ export default function InputWithIcon() {
     message: "",
   });
   console.log("estado error: ", error.message);
+
   // para validar el email
   const emailValidation = (email) => {
     // expresion regular para validar email
@@ -61,10 +62,12 @@ export default function InputWithIcon() {
       return;
     }
     console.log(usuario.correo);
+
     setError({
       error: false,
       message: "",
     });
+
     try {
       const respuesta = await axios({
         method: "POST",
@@ -84,8 +87,14 @@ export default function InputWithIcon() {
       // Se cambia el estado de la alerta
       setAlerta({
         open: true,
-        tipo: "warning",
-        texto: "Error al verificar los datos",
+        tipo: "error",
+        texto: "Usuario Registrado, Intente con otros datos.",
+      });
+      // Limpiar los campos del formulario
+      setUsuario({
+        nombre: "",
+        apellido: "",
+        email: "",
       });
     }
     // console.log(usuario);
@@ -95,6 +104,7 @@ export default function InputWithIcon() {
     setUsuario({ ...usuario, [evento.target.name]: evento.target.value });
     // console.log(evento.name, evento.target.value);
   };
+
   return (
     <div className="flex justify-center">
       <div
@@ -119,6 +129,9 @@ export default function InputWithIcon() {
               required
               // id="input-with-username"
               label="User Name"
+              // InputLabelProps={{
+              //   style: { color: "#580EF6" },
+              // }}
               inputProps={{ style: { color: "white" } }}
               // manejandoCambios del textfield
               onChange={manejarCambios}
@@ -136,6 +149,9 @@ export default function InputWithIcon() {
               // id="input-with-correo"
               required
               label="Correo"
+              // InputLabelProps={{
+              //   style: { color: "#580EF6" },
+              // }}
               inputProps={{ style: { color: "white" } }}
               // manejandoCambios textfield
               onChange={manejarCambios}
@@ -155,6 +171,9 @@ export default function InputWithIcon() {
               // id="input-with-password"
               label="Password"
               type="Password"
+              // InputLabelProps={{
+              //   style: { color: "#580EF6" },
+              // }}
               inputProps={{ style: { color: "white" } }}
               // manejandoCambios textfield
               onChange={manejarCambios}
@@ -173,6 +192,7 @@ export default function InputWithIcon() {
           <button
             className="bg-[#580ef6] rounded-full w-72 h-10 m-1 ef"
             type="submit"
+            onClick={() => navigate("/login")}
           >
             Registrarse
           </button>

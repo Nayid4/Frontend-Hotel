@@ -1,11 +1,10 @@
-import React from 'react'
-import Banner from "../Components/Banner"
-const Home = () => {
-  return (
-    <div className='min-h[1800]'>
-      <Banner/>
-    </div>
-  )
-}
+import React from "react";
+import Banner from "../Components/Banner";
 
-export default Home
+export default function Home() {
+  return (
+    <div className="min-h[1800]">
+      <Banner />
+    </div>
+  );
+}

@@ -4,15 +4,14 @@ import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Lock";
 import imagen from "../assets/images/logo.png";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../index.css";
 import axios from "axios";
-import { Snackbar, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import Alert from "../Components/Alert"
+import { Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Alert from "../Components/Alert";
 
 export default function Login({ cambiarEstadoAuth }) {
-
   const navigate = useNavigate();
 
   // Estado para mostrar alerta
@@ -27,6 +26,7 @@ export default function Login({ cambiarEstadoAuth }) {
     nombreUsuario: "",
     password: "",
   });
+
   // formulario funcion
   const manejarFormulario = async (evento) => {
     evento.preventDefault();
@@ -37,7 +37,8 @@ export default function Login({ cambiarEstadoAuth }) {
         data: usuario,
       });
       //console.log("user: ",usuario);
-      console.log("respuesta 1:",respuesta.data);
+      console.log("respuesta 1:", respuesta.data);
+
       // Alertas dependiendo de la respuesta
       if (respuesta.data.auth === false) {
         console.log("respuesta: ", respuesta.data);
@@ -45,16 +46,15 @@ export default function Login({ cambiarEstadoAuth }) {
         setAlerta({
           open: true,
           tipo: "error",
-          texto: "Usuario o Contraseña incorrectos!"
-        })
-      }else{
+          texto: "Usuario o Contraseña incorrectos!",
+        });
+      } else {
         cambiarEstadoAuth({
           auth: respuesta.data.auth,
-          userName: respuesta.data.usuario.nombreUsuario
+          userName: respuesta.data.usuario.nombreUsuario,
         }); // Cambiar el estado de "auth"
-        console.log("User Name: ", respuesta.data.usuario.nombreUsuario)
-        navigate("/")
-        
+        console.log("User Name: ", respuesta.data.usuario.nombreUsuario);
+        navigate("/");
       }
     } catch (error) {
       console.error("Error en la solicitud POST:", error.message);
@@ -62,16 +62,18 @@ export default function Login({ cambiarEstadoAuth }) {
       setAlerta({
         open: true,
         tipo: "warning",
-        texto: "Error al verificar los datos"
-      })
+        texto: "Error al verificar los datos",
+      });
     }
-     console.log(usuario);
+    console.log(usuario);
   };
+
   // capturando usuario
   const manejarCambios = (evento) => {
     setUsuario({ ...usuario, [evento.target.name]: evento.target.value });
     // console.log(evento.name, evento.target.value);
   };
+
   return (
     <div className="flex justify-center">
       <div
@@ -147,8 +149,13 @@ export default function Login({ cambiarEstadoAuth }) {
           <div className="flex justify-center m-1">
             <p className="text-[#f7f7f7] text-sm/[17px] pr-1">
               ¿No tienes cuenta?
-            </p>  
-            <Typography variant="p" className="text-[#580ef6] text-sm/[17px] " sx={{cursor: "pointer"}} onClick={() => navigate("/registro")}>
+            </p>
+            <Typography
+              variant="p"
+              className="text-[#580ef6] text-sm/[17px] "
+              sx={{ cursor: "pointer" }}
+              onClick={() => navigate("/registro")}
+            >
               Registrarse
             </Typography>
           </div>
