@@ -1,16 +1,12 @@
-import {React, useState, useEffect} from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { React, useState, useEffect } from "react";
+import { Box, Container, Typography } from "@mui/material";
 import Card from "../Components/Card";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import axios from 'axios'
-
-
+import axios from "axios";
 
 export default function Review() {
-
-  
-  const [resenas,setResenas] = useState([])
+  const [resenas, setResenas] = useState([]);
 
   useEffect(() => {
     const obtenerResenas = async () => {
@@ -21,18 +17,15 @@ export default function Review() {
 
       //console.log(result.data)
 
-      setResenas(result.data.resenas)
+      setResenas(result.data.resenas);
+    };
+    obtenerResenas();
+  }, []);
 
-    }
-    obtenerResenas()
-  },[])
+  console.log(resenas);
+  console.log(typeof resenas);
+  console.log(resenas[0]);
 
-  console.log(resenas)
-  console.log(typeof resenas)
-  console.log(resenas[0])
-
-  
-  
   // Responsive del carusel de trabajadores
   const responsive = {
     superLargeDesktop: {
@@ -74,26 +67,17 @@ export default function Review() {
         </Typography>
       </Box>
       {/*- - Contenido - -*/}
-      <Container
-        maxWidth="md"
-        sx={{ background: "#101010", marginBottom: 3 }}
-      >
+      <Container maxWidth="md" sx={{ background: "#101010", marginBottom: 3 }}>
         {/*- - Se muestra el carrusel - -*/}
         <Carousel showDots={true} responsive={responsive}>
-            {resenas.map((info,i)=>(
-                <Box key={i} sx={{marginRight: 5}}>
-                {/*- - Carta de la reseña - -*/}
-                <Card
-                  datos={info}
-                />
-                </Box>
-                
-            ))}
+          {resenas.map((info, i) => (
+            <Box key={i} sx={{ marginRight: 5 }}>
+              {/*- - Carta de la reseña - -*/}
+              <Card datos={info} />
+            </Box>
+          ))}
         </Carousel>
-        
-        
       </Container>
     </>
   );
-};
-
+}

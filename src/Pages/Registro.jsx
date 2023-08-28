@@ -90,12 +90,6 @@ export default function InputWithIcon() {
         tipo: "error",
         texto: "Usuario Registrado, Intente con otros datos.",
       });
-      // Limpiar los campos del formulario
-      setUsuario({
-        nombre: "",
-        apellido: "",
-        email: "",
-      });
     }
     // console.log(usuario);
   };
@@ -192,7 +186,6 @@ export default function InputWithIcon() {
           <button
             className="bg-[#580ef6] rounded-full w-72 h-10 m-1 ef"
             type="submit"
-            onClick={() => navigate("/login")}
           >
             Registrarse
           </button>

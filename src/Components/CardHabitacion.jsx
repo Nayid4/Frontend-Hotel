@@ -36,7 +36,7 @@ const responsive = {
 };
 
 // Funcion que retorna la carta de la habitacion
-const Habitacion = ({ bed, auth, activarAlerta, cambiarRoom }) => {
+export default function Habitacion({ bed, auth, activarAlerta, cambiarRoom }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -64,7 +64,7 @@ const Habitacion = ({ bed, auth, activarAlerta, cambiarRoom }) => {
     >
       {/*- - Carrusel de imagenes de la habitacion - -*/}
       <Box sx={{ width: 400, height: 400 }}>
-        <Carousel showDots={true} responsive={responsive}>
+        <Carousel showDots={false} responsive={responsive}>
           {bed.imagen.map((i, index) => (
             <Img key={index} src={i} alt="" />
           ))}
@@ -98,6 +98,4 @@ const Habitacion = ({ bed, auth, activarAlerta, cambiarRoom }) => {
       </Box>
     </Paper>
   );
-};
-
-export default Habitacion;
+}

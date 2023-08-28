@@ -4,19 +4,20 @@
 body {
   background-color: #101010;
 }
+
 * {
   padding: 0;
   margin: 0;
 }
+
 div {
   color: #f7f7f7;
 }
+
 .logo-main {
   height: 40px;
 }
-/* .hotel-main{
-    height: 500px;
-} */
+
 .algo {
   border-color: #3d3a50;
 }

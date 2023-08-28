@@ -10,20 +10,25 @@ import {
 } from "@mui/material";
 import Calificacion from "./Calificacion";
 
-const Cards = ({datos}) => {
+export default function Cards({ datos }) {
   return (
-    <Card color="#191919" sx={{ 
-        Width: 345, 
+    <Card
+      color="#191919"
+      sx={{
+        Width: 350,
         backgroundColor: "#191919",
-        transition: "0.2s","&:hover":{ transform: "scale(1.05)"}
-        }}>
+        transition: "0.2s",
+        "&:hover": { transform: "scale(1.05)" },
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
-          sx={{height: 200, width:345}}
+          sx={{ height: 200, width: 345 }}
           image={datos.imagen}
           alt="Reseña"
         />
+
         <CardContent sx={{ backgroundColor: "#191919", height: 100 }}>
           <Typography gutterBottom variant="h5" component="div">
             {datos.nombre}
@@ -34,7 +39,7 @@ const Cards = ({datos}) => {
         </CardContent>
       </CardActionArea>
       <div className="ml-4">
-        <Calificacion></Calificacion>
+        <Calificacion />
       </div>
       <CardActions sx={{ backgroundColor: "#191919" }} color="primary">
         <Button size="small" color="primary">
@@ -43,6 +48,4 @@ const Cards = ({datos}) => {
       </CardActions>
     </Card>
   );
-};
-
-export default Cards;
+}

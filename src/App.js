@@ -16,7 +16,7 @@ import Login from "./Pages/Login"
 import Profile from "./Pages/Profile-user"
 import BookingUser from "./Pages/Booking-user";
 
-function App() {
+export default function App() {
 
   // Estado para saber si un usuario inicio sesion
   const [auth, setAuth] = useState({ 
@@ -57,5 +57,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
