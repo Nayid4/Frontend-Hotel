@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Lock";
-import imagen from "../assets/images/Logo.png";
+import imagen from "../assets/images/logo.png";
 import { useState } from "react";
 import "../index.css";
 import axios from "axios";

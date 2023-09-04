@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
-import Logo from "../assets/images/Logo.png";
+import Logo from "../assets/images/logo.png";
 import {
   Button,
   MenuItem,
