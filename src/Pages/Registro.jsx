@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Lock";
 import EmailIcon from "@mui/icons-material/AlternateEmail";
-import imagen from "../assets/images/Logo.png";
+import imagen from "../assets/images/logo.png";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import "../index.css";
