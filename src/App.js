@@ -18,6 +18,26 @@ import BookingUser from "./Pages/Booking-user";
 
 export default function App() {
 
+  // Lista que contiene los titulos del header
+  const ListaMenu = [
+    {
+      titulo:"NOSOTROS",
+      path:"/about-us"
+    },
+    {
+      titulo:"RESEÑAS",
+      path:"/reviews"
+    },
+    {
+      titulo:"HABITACIONES",
+      path:"/bed-rooms"
+    },
+    {
+      titulo:"CONTACTO",
+      path:"/contact-us"
+    }
+  ];
+
   // Estado para saber si un usuario inicio sesion
   const [auth, setAuth] = useState({ 
     auth: false,
@@ -38,8 +58,8 @@ export default function App() {
   };
 
   return (
-    <div className="max-w-[1440px] mx-auto bg-[#0F1319">
-      <Header auth={auth} cambiarEstadoAuth={cambiarEstadoAuth}/> 
+    <div>
+      <Header ListaMenu={ListaMenu} auth={auth} cambiarEstadoAuth={cambiarEstadoAuth}/> 
       <Routes> 
         <Route path='/' element ={<Home/>} />
         <Route path='/registro' element ={<Registro/>} />

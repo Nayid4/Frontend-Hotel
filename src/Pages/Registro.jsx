@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Lock";
 import EmailIcon from "@mui/icons-material/AlternateEmail";
-import imagen from "../assets/images/logo.png";
+import imagen from "../assets/images/Logo.png";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import "../index.css";
@@ -100,7 +100,7 @@ export default function InputWithIcon() {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center pt-40">
       <div
         className="box-login  rounded-[30px] flex flex-col justify-center items-center
        bg-[#191919] w-1/2 h-96 mb-10"

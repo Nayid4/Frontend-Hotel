@@ -9,15 +9,46 @@ import {
   Grid,
   TextField,
   Checkbox,
+  Link,
+  Paper,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  AppBar,
+  Toolbar,
+  Step,
+  Stepper,
+  StepLabel,
+  CssBaseline
 } from "@mui/material";
 
 import React, { useState, Fragment } from "react";
-import { Paper, Button, List, ListItem, ListItemText } from "@mui/material";
+
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import axios from "axios";
 import Alert from "../Components/Alert";
+import PaymentForm from "../Components/PaymentForm";
+import AddressForm from "../Components/AdressForm";
+import InvoiceForm from "../Components/InvoiceForm";
+
+
+const steps = ['Datos De Contacto', 'Detalles De Pago', 'Detalles De Orden'];
+
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return <AddressForm />;
+    case 1:
+      return <PaymentForm />;
+    case 2:
+      return <InvoiceForm />;
+    default:
+      throw new Error('Unknown step');
+  }
+}
 
 function Booking({ room, auth }) {
   // Estado para mostrar alerta
@@ -53,10 +84,10 @@ function Booking({ room, auth }) {
   //- - - - - - - - - - - - - - - - - - - - - - - - - - - -  -- - - - -- - - - - - - -- - -
 
   // Estados del formulario de datos del Cliente
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [phone, setPhone] = React.useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   // Funciones para obtener los valores de las cajas de texto
   const handleFirstNameChange = (event) => {
@@ -74,9 +105,8 @@ function Booking({ room, auth }) {
   const handlePhoneChange = (event) => {
     setPhone(event.target.value);
   };
-
   //- - - - - - - - - - - - - - - - - - - - - - - - - - - -  -- - - - -- - - - - - - -- - -
-
+  
   // Estados del formulario de datos de la forma de pago
 
   // Estado para el campo "Titular"
@@ -93,8 +123,6 @@ function Booking({ room, auth }) {
 
   // Estado para el checkbox "Estoy de acuerdo con los términos y condiciones"
   const [agreeTerms, setAgreeTerms] = useState(false);
-
-  //- - - - - - - - - - - - - - - - - - - - - - - - - - - -  -- - - - -- - - - - - - -- - -
 
   const titulosReserva = [
     "Fecha De Ingreso:",
@@ -165,416 +193,65 @@ function Booking({ room, auth }) {
     setReservaHabitacion(true);
   };
 
+
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+
   return (
-    <>
-      {/*- - Titulo - -*/}
-      <Box>
-        <Typography
-          variant="h1"
-          color="primary"
-          component="div"
-          sx={{
-            textAlign: "center",
-            marginTop: 10,
-            marginBottom: 5,
-            fontSize: 50,
-          }}
-        >
-          Reservas
-        </Typography>
-      </Box>
-
-      {/*- - Contenido del formulario - -*/}
-      <Container maxWidth="md" sx={{ marginBottom: 5 }}>
-        <Paper sx={{ paddingBottom: 3, paddinBottom: 2 }}>
-          {/*- - Condicion para mostrar la factura o el formulario */}
-          {reservaHabitacion === true ? (
-            <Fragment>
-              <Container>
-                {/*- - Informacion de reserva - -*/}
-                <Typography
-                  variant="h3"
-                  gutterBottom
-                  sx={{ color: "black", textAlign: "center" }}
-                >
-                  FACTURA DE LA RESERVA
-                </Typography>
-
-                {/*- - Informacion de reserva - -*/}
-                <Typography variant="h6" gutterBottom sx={{ color: "black" }}>
-                  Resumen De Reserva
-                </Typography>
-                <List disablePadding>
-                  {Object.entries(datosReserva.reservas).map(
-                    ([clave, valor]) => (
-                      <ListItem key={clave} sx={{ py: 1, px: 0 }}>
-                        <ListItemText
-                          sx={{ color: "black" }}
-                          primary={clave}
-                          secondary={
-                            clave === "fechaIngreso" || clave === "fechaSalida"
-                              ? new Date(valor).toLocaleDateString("es-ES")
-                              : valor
-                          }
-                        />
-                      </ListItem>
-                    )
-                  )}
-
-                  <ListItem sx={{ py: 1, px: 0 }}>
-                    <ListItemText sx={{ color: "black" }} primary="Total" />
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ fontWeight: 700, color: "black" }}
-                    >
-                      $ {room.precio}
-                    </Typography>
-                  </ListItem>
-                </List>
-                <Grid container spacing={2}>
-                  {/*- - Informacion de contacto - -*/}
-                  <Grid item xs={12} sm={6}>
-                    <Typography
-                      variant="h6"
-                      gutterBottom
-                      sx={{ mt: 2, color: "black" }}
-                    >
-                      Contacto
-                    </Typography>
-
-                    {Object.entries(datosReserva.contacto).map(
-                      ([clave, valor]) => (
-                        <Typography
-                          key={clave}
-                          gutterBottom
-                          sx={{ color: "black" }}
-                        >
-                          {clave}: {valor}
-                        </Typography>
-                      )
-                    )}
-                  </Grid>
-
-                  {/*- - Detalles de pago - -*/}
-                  {
-                    <Grid item xs={12} sm={6}>
-                      <Typography
-                        variant="h6"
-                        gutterBottom
-                        sx={{ mt: 2, color: "black" }}
-                      >
-                        Detalles De Pago
-                      </Typography>
-
-                      {Object.entries(datosReserva.pago).map(
-                        ([clave, valor]) => (
-                          <Typography
-                            key={clave}
-                            gutterBottom
-                            sx={{ color: "black" }}
-                          >
-                            {clave}:{" "}
-                            {clave === "fechaVencimiento"
-                              ? new Date(valor).toLocaleDateString("es-ES")
-                              : valor}
-                          </Typography>
-                        )
-                      )}
-                    </Grid>
-                  }
-                </Grid>
-              </Container>
-            </Fragment>
+    <React.Fragment>
+      <Container component="main" maxWidth="md" sx={{ mb: 4, pt: 20 }}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Typography component="h1" variant="h4" align="center">
+            Reserva
+          </Typography>
+          <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          {activeStep === steps.length ? (
+            <React.Fragment>
+              <Typography variant="h5" gutterBottom>
+                Thank you for your order.
+              </Typography>
+              <Typography variant="subtitle1">
+                Your order number is #2001539. We have emailed your order
+                confirmation, and will send you an update when your order has
+                shipped.
+              </Typography>
+            </React.Fragment>
           ) : (
             <Fragment>
-              <Container
-                sx={{
-                  background: "white",
-                  marginBottom: 5,
-                  marginTop: 10,
-                  paddingTop: 5,
-                }}
-                component="form"
-                onSubmit={handleClickReservaHabitacion}
-              >
-                {/*- - - - - - - - Formulario de reserva - - - - - - - -*/}
+              {getStepContent(activeStep)}
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                {activeStep !== 0 && (
+                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                    Back
+                  </Button>
+                )}
 
-                <Grid container spacing={5}>
-                  {/*- - Titulo de datos de reserva - -*/}
-                  <Grid item xs={12} sm={12}>
-                    <Typography
-                      variant="h6"
-                      sx={{ color: "black" }}
-                      gutterBottom
-                    >
-                      Datos De Reserva
-                    </Typography>
-                  </Grid>
-
-                  {/*- - Fecha de ingreso - -*/}
-                  <Grid item xs={12} sm={6}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        label="Fecha De Ingreso"
-                        value={DateInicio}
-                        required
-                        onChange={(newDate) => setDateInicio(newDate)}
-                        renderInput={(props) => (
-                          <TextField
-                            required
-                            variant="standard"
-                            fullWidth
-                            {...props}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </Grid>
-
-                  {/*- - Fecha de salida - -*/}
-                  <Grid item xs={12} sm={6}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        label="Fecha De Salida"
-                        value={DateFinal}
-                        onChange={(newDate) => setDateFinal(newDate)}
-                        renderInput={(props) => (
-                          <TextField
-                            required
-                            variant="standard"
-                            fullWidth
-                            {...props}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </Grid>
-
-                  {/*- - Cantidad de adultos - -*/}
-                  <Grid item xs={12} sm={4}>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: 200 }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        Adultos
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        value={adultos}
-                        onChange={handleChangeAdultos}
-                        label="Adultos"
-                      >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
-                  {/*- - Cantidad de niños - -*/}
-                  <Grid item xs={12} sm={4}>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: 200 }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        Niños
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        value={ninos}
-                        onChange={handleChangeNinos}
-                        label="Niños"
-                      >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
-                  {/*- - Habitacion - -*/}
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      disabled
-                      id="outlined-disabled"
-                      label={habitacion}
-                    />
-                  </Grid>
-
-                  {/*- - - - - - - - - Formulario de Cliente - - - - - - - - -*/}
-
-                  {/*- - Titulo de datos de contacto - -*/}
-                  <Grid item sx={12} sm={12}>
-                    <Typography
-                      variant="h6"
-                      sx={{ color: "black" }}
-                      gutterBottom
-                    >
-                      Datos De Contacto
-                    </Typography>
-                  </Grid>
-
-                  {/*- - Nombre- -*/}
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      required
-                      id="firstName"
-                      name="firstName"
-                      label="Nombre"
-                      fullWidth
-                      autoComplete="given-name"
-                      variant="standard"
-                      value={firstName}
-                      onChange={handleFirstNameChange}
-                    />
-                  </Grid>
-
-                  {/*- - Apellido - -*/}
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      required
-                      id="lastName"
-                      name="lastName"
-                      label="Apellido"
-                      fullWidth
-                      autoComplete="family-name"
-                      variant="standard"
-                      value={lastName}
-                      onChange={handleLastNameChange}
-                    />
-                  </Grid>
-
-                  {/*- - Correo - -*/}
-                  <Grid item xs={6} sm={6}>
-                    <TextField
-                      required
-                      id="email"
-                      name="email"
-                      label="Correo"
-                      fullWidth
-                      variant="standard"
-                      value={email}
-                      onChange={handleEmailChange}
-                    />
-                  </Grid>
-
-                  {/*- - Telefono - -*/}
-                  <Grid item xs={6} sm={6}>
-                    <TextField
-                      required
-                      id="phone"
-                      name="phone"
-                      label="Telefono"
-                      fullWidth
-                      variant="standard"
-                      value={phone}
-                      onChange={handlePhoneChange}
-                    />
-                  </Grid>
-
-                  {/*- - - - - - - Formulario de forma de pago - - - - - - -*/}
-
-                  {/*- - Titulo de metodo de pago - -*/}
-                  <Grid item xs={12} sm={12}>
-                    <Typography
-                      variant="h6"
-                      sx={{ color: "black" }}
-                      gutterBottom
-                    >
-                      Metodo De Pago
-                    </Typography>
-                  </Grid>
-
-                  {/*- - Titular - -*/}
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      required
-                      id="cardName"
-                      label="Titular"
-                      fullWidth
-                      autoComplete="cc-name"
-                      variant="standard"
-                      value={cardName}
-                      onChange={(e) => setCardName(e.target.value)}
-                    />
-                  </Grid>
-
-                  {/*- - Numero de la tarjeta - -*/}
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      required
-                      id="cardNumber"
-                      label="Número de tarjeta"
-                      fullWidth
-                      autoComplete="cc-number"
-                      variant="standard"
-                      value={cardNumber}
-                      onChange={(e) => setCardNumber(e.target.value)}
-                    />
-                  </Grid>
-
-                  {/*- - Fecha de vencimiento - -*/}
-                  <Grid item xs={12} md={6}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        label="Fecha De Vencimiento"
-                        value={DateVencimiento}
-                        onChange={(newDate) => setDateVencimiento(newDate)}
-                        renderInput={(props) => (
-                          <TextField
-                            required
-                            variant="standard"
-                            fullWidth
-                            {...props}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </Grid>
-
-                  {/*- - CVV - -*/}
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      required
-                      id="cvv"
-                      label="CVV"
-                      helperText="Últimos tres dígitos en la tira de firma"
-                      fullWidth
-                      autoComplete="cc-csc"
-                      variant="standard"
-                      value={cvv}
-                      onChange={(e) => setCvv(e.target.value)}
-                    />
-                  </Grid>
-
-                  {/*- - Acuerdos - -*/}
-                  <Grid item xs={12}>
-                    <Typography sx={{ color: "black" }}>
-                      <Checkbox {...label} required />
-                      Estoy de acuerdo con los términos y condiciones.
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Button variant="contained" type="submit" sx={{ mt: 3, ml: 1 }}>
-                  Realizar Reserva
+                <Button
+                  variant="contained"
+                  onClick={handleNext}
+                  sx={{ mt: 3, ml: 1 }}
+                >
+                  {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
                 </Button>
-              </Container>
+              </Box>
             </Fragment>
           )}
         </Paper>
-
-        {/*- - Notficacion de alerta - -*/}
-        <Alert alerta={alerta} setAlerta={setAlerta} />
       </Container>
-    </>
+    </React.Fragment>
   );
 }
 

@@ -4,6 +4,7 @@ import App from "./App";
 import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = createTheme({
   palette: {
@@ -12,6 +13,9 @@ const theme = createTheme({
     },
     secondary:{
       main: "#F7F7F7"
+    },
+    third:{
+      main:"#212121"
     },
     text:{
       main: "#580EF6"
