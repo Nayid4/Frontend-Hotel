@@ -67,9 +67,9 @@ export default function Review() {
         </Typography>
       </Box>
       {/*- - Contenido - -*/}
-      <Container maxWidth="md" sx={{ background: "#101010", marginBottom: 3 }}>
+      <Container maxWidth="md" sx={{ marginBottom: 3 }}>
         {/*- - Se muestra el carrusel - -*/}
-        <Carousel showDots={true} responsive={responsive}>
+        <Carousel showDots={false} responsive={responsive}>
           {resenas.map((info, i) => (
             <Box key={i} sx={{ marginRight: 5 }}>
               {/*- - Carta de la reseña - -*/}

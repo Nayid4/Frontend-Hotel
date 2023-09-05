@@ -46,7 +46,12 @@ export default function Header({ ListaMenu,auth, cambiarEstadoAuth }) {
   ];
 
   return (
-    <AppBar color="third">
+    <AppBar color="third" sx={{backdropFilter:'blur(5px) saturate(131%)',
+    WebkitBackdropFilter: 'blur(5px) saturate(131%)',
+    backgroundColor: 'rgba(17, 25, 40, 0.62)',
+    borderRadius: '0px',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.125)'
+    }}>
       <Container maxWidth="x1" color="inherit"> 
         <Toolbar disableGutters>
           {/*- - Icono Responsive - - */}
@@ -75,8 +80,9 @@ export default function Header({ ListaMenu,auth, cambiarEstadoAuth }) {
           <Box sx={{ justifyContent: 'flex-end',flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           {auth.auth === true ? (
             <IconButtom menu= {menu} auth = {auth} cambiarEstadoAuth={cambiarEstadoAuth}/>
-          ) : (<>
-          </>)}
+          ) : (
+            null
+          )}
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -113,6 +119,7 @@ export default function Header({ ListaMenu,auth, cambiarEstadoAuth }) {
               ))}
 
               {/*- - Si no se ha iniciado sesion generamos los botones de registro - -*/}
+              
               {auth.auth === false ? (
               <Box sx={{ display: 'grid', gridTemplateRows: 'repeat(2, 1fr)' }}>
                 {/*- - Boton Iniciar sesion - -*/}
@@ -137,8 +144,8 @@ export default function Header({ ListaMenu,auth, cambiarEstadoAuth }) {
                 </Button>
               </Box>
             ):(
-            <>
-            </>)}
+            null
+            )}
             </Menu>
           </Box>
 

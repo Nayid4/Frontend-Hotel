@@ -28,6 +28,7 @@ export default function IconButtom({menu, auth, cambiarEstadoAuth}){
       },
     });
     navigate("/");
+    
   };
 
     return (
@@ -61,7 +62,7 @@ export default function IconButtom({menu, auth, cambiarEstadoAuth}){
                 >
                     {/*- - Opciones del menu de usuario - -*/}
                     {menu.map((item) => (
-                        <MenuItem key={item.titulo} onClick={() => (item.path === "Cerrar" ? handleClick : navigate(item.path))}>
+                        <MenuItem key={item.titulo} onClick={() => (item.path === "Cerrar" ? handleClick() : navigate(item.path))}>
                             <Typography textAlign="center">{item.titulo}</Typography>
                         </MenuItem>
                     ))}

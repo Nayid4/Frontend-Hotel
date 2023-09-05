@@ -23,7 +23,7 @@ import {
   CssBaseline
 } from "@mui/material";
 
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, createContext } from "react";
 
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -36,6 +36,7 @@ import InvoiceForm from "../Components/InvoiceForm";
 
 
 const steps = ['Datos De Contacto', 'Detalles De Pago', 'Detalles De Orden'];
+export  const userContext = createContext();
 
 function getStepContent(step) {
   switch (step) {
