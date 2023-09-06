@@ -39,7 +39,7 @@ export default function Bed({ cambiarRoom, auth }) {
     <Box sx={{marginTop: 15,
       marginBottom: 5,}}>
       {/*- - Titulo - -*/}
-      <Box>
+      <Box sx={{alignContent:"center"}}>
         <Typography
           variant="h1"
           color="secondary"
@@ -58,11 +58,11 @@ export default function Bed({ cambiarRoom, auth }) {
         {/*- - Contenido - -*/}
       </Box>
       
-      <Container maxWidth="md" >
+      <Container maxWidth="lg" >
         <Grid container spacing={1}>
           {/*- - Carta de la habitacion - -*/}
           {habitaciones.map((bed, i) => (
-            <Grid key={i} item md={6} sm={6}>
+            <Grid key={i} item md={6} sm={12} sx={{display:"flex",justifyContent:"center"}}>
                 <Box sx={{margin:2}}>
                   <Habitacion
                     key={i}

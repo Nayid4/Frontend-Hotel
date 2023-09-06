@@ -4,14 +4,9 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import AirlineSeatIndividualSuiteIcon from "@mui/icons-material/AirlineSeatIndividualSuite";
 import { useNavigate } from "react-router-dom";
+import imagen from "../assets/images/Habitacion-1/h-1.jpg"
 
-// Estilo de la imagen de la habitacion
-const Img = styled("img")({
-  width: 450,
-  height: 350,
-  objectFit: "cover",
-  objectPosition: "center",
-});
+
 
 // Responsive del carusel de trabajadores
 const responsive = {
@@ -35,6 +30,9 @@ const responsive = {
   },
 };
 
+// Para cargar las imagenes
+const habitaciones =  require.context('../assets/images',true);
+
 // Funcion que retorna la carta de la habitacion
 export default function Habitacion({ bed, auth, activarAlerta, cambiarRoom }) {
   const navigate = useNavigate();
@@ -48,12 +46,16 @@ export default function Habitacion({ bed, auth, activarAlerta, cambiarRoom }) {
     }
   };
 
+
   return (
     
-    <Card sx={{ bgcolor:"#191919",maxWidth:400}}>
+    <Card sx={{ bgcolor:"#191919",maxWidth:450}}>
       <Carousel showDots={true} responsive={responsive}>
         {bed.imagen.map((i, index) => (
-          <Img key={index} src={i} alt="" />
+          
+          <img className="w-full h-auto object-cover" style={{ height: "250px" }} key={index} 
+            src={habitaciones(i)} alt="" />
+          
         ))}
       </Carousel>
       <CardContent sx={{minHeight:266}}>
@@ -85,12 +87,12 @@ export default function Habitacion({ bed, auth, activarAlerta, cambiarRoom }) {
       <CardActions>
         
         {/*- - Precio - -*/}
-        <Box sx={{ pr: 10, color: "white" }}>
+        <Box sx={{display:"flex", flexGrow:1,color: "white" }}>
           <p>Precio: ${bed.precio} COP</p>
         </Box>
 
         {/*- - Boton de reservar - -*/}
-        <Button variant="contained" onClick={handleClick}>
+        <Button sx={{display:"flex", flexGrow:0}} variant="contained" onClick={handleClick}>
           Reservar
         </Button>
       </CardActions>
