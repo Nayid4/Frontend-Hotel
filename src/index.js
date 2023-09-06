@@ -15,10 +15,10 @@ const theme = createTheme({
       main: "#F7F7F7"
     },
     third:{
-      main:"#212121"
+      main:"#3D3A50"
     },
-    text:{
-      main: "#580EF6"
+    fourth:{
+      main: "#1A1C22"
     }
   },
 });
