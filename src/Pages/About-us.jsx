@@ -85,18 +85,21 @@ export default function About() {
   console.log(empleados[0]);
 
   return (
-    <>
+    <Box container sx={{marginTop: 15,
+      marginBottom: 5,}}>
       {/*- - Titulo - -*/}
       <Box>
         <Typography
           variant="h1"
-          color="primary"
+          color="secondary"
           component="div"
           sx={{
             textAlign: "center",
-            marginTop: 10,
-            marginBottom: 10,
             fontSize: 50,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            textDecoration: 'none',
+            marginBottom: 10,
           }}
         >
           Nosotros
@@ -104,49 +107,58 @@ export default function About() {
       </Box>
 
       {/*- - Contenido - -*/}
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Grid container spacing={3}>
           {/*- - Introduccion- -*/}
-          <Grid item xs={12}>
+          <Grid item md={7} sx={12}>
             <Box sx={{ background: "#191919", padding: 5 }}>
               <Typography
                 variant="h1"
                 color="primary"
-                sx={{ fontSize: 30, margin: 2, textAlign: "center" }}
+                sx={{ fontSize: 30, margin: 2, textAlign: "center",fontFamily: 'monospace',
+                fontWeight: 700,
+                textDecoration: 'none', }}
               >
                 {informacion[0].nombre}
               </Typography>
-              <Typography variant="p">{informacion[0].descripcion}</Typography>
-              <img
-                className="hotel-main flex items-center rounded-full mt-10"
-                src={imagen}
-                alt=""
-              />
+              <Typography color="secondary" variant="p">{informacion[0].descripcion}</Typography>
+              <Box sx={{justifyContent: 'center',flexGrow: 1, display: { xs: 'flex', md: 'flex' }}}>
+                <img
+                  className="hotel-main rounded-full mt-10 w-4/5"
+                  src={imagen}
+                  alt=""
+                />
+              </Box>
+              
             </Box>
           </Grid>
 
           {/*- - Recorrido para mostrar la mision y la vision - -*/}
-          {informacion.slice(1).map((i) => (
-            <Grid key={i.nombre} item xs={6}>
-              <Box
-                sx={{
-                  background: "#191919",
-                  padding: 5,
-                  marginBottom: 3,
-                  height: 420,
-                }}
-              >
-                <Typography
-                  variant="h1"
-                  color="primary"
-                  sx={{ fontSize: 30, margin: 2 }}
+          <Grid item container spacing={3} sm={12} md={5}>
+            {informacion.slice(1).map((i) => (
+              <Grid key={i.nombre} item md={12} sm={6}>
+                <Box
+                  sx={{
+                    background: "#191919",
+                    padding: 2,
+                    marginBottom: 2
+                  }}
                 >
-                  {i.nombre}
-                </Typography>
-                <Typography variant="p">{i.descripcion}</Typography>
-              </Box>
-            </Grid>
-          ))}
+                  <Typography
+                    variant="h1"
+                    color="primary"
+                    sx={{ fontSize: 30, margin: 2,fontFamily: 'monospace',
+                    fontWeight: 700,
+                    textDecoration: 'none' }}
+                  >
+                    {i.nombre}
+                  </Typography>
+                  <Typography variant="p">{i.descripcion}</Typography>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+          
 
           {/*- - Carrusel de trabajadores - -*/}
           <Grid item xs={12}>
@@ -154,7 +166,9 @@ export default function About() {
               <Typography
                 variant="h1"
                 color="primary"
-                sx={{ fontSize: 30, margin: 2, textAlign: "center" }}
+                sx={{ fontSize: 30, margin: 2, textAlign: "center",fontFamily: 'monospace',
+                fontWeight: 700,
+                textDecoration: 'none', }}
               >
                 Trabajadores
               </Typography>
@@ -169,6 +183,6 @@ export default function About() {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 }
