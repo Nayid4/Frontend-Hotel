@@ -15,7 +15,7 @@ const Img = styled("img")({
 
 const Contact = () => {
     return (
-        <Box container sx={{marginTop: 15,
+        <Box sx={{marginTop: 15,
             marginBottom: 5,}}>
             {/*- - Titulo - -*/}
             <Box>

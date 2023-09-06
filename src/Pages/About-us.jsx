@@ -88,8 +88,8 @@ export default function About() {
   console.log(empleados[0]);
 
   return (
-    <Box container sx={{marginTop: 15,
-      marginBottom: 5,}}>
+    <Box sx={{marginTop: 15,
+      marginBottom: 5}}>
       {/*- - Titulo - -*/}
       <Box>
         <Typography
@@ -113,7 +113,7 @@ export default function About() {
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           {/*- - Introduccion- -*/}
-          <Grid item md={7} sx={12}>
+          <Grid item md={7} sm={12}>
             <Box sx={{ background: "#191919", padding: 5, borderRadius:'3%' }}>
               <Typography
                 variant="h1"
@@ -172,7 +172,7 @@ export default function About() {
                 color="primary"
                 sx={{ fontSize: 30, margin: 2, textAlign: "center",fontFamily: 'monospace',
                 fontWeight: 700,
-                textDecoration: 'none', }}
+                textDecoration: 'none'}}
               >
                 Trabajadores
               </Typography>
