@@ -7,9 +7,10 @@ import styled from "@emotion/styled";
 // Estilo de la imagen de la habitacion
 const Img = styled("img")({
     width: 400,
-    height: 400,
+    height: 250,
     objectFit: "cover",
-    objectPosition: "center"
+    objectPosition: "center",
+    borderRadius:"3%"
 })
 
 const Contact = () => {
@@ -36,12 +37,12 @@ const Contact = () => {
             {/*- - Contenido- -*/}
             <Container 
                 maxWidth="md"
-                sx={{ background: "#191919", marginBottom: 5, marginTop: 10, borderRadius:"3%"}}
+                
             >
-                <Grid container spacing={3}>
+                <Grid container spacing={3} >
                     {/*- - Introduccion- -*/}
-                    <Grid item xs={6}>
-                        <Box sx={{margin: 3}}>
+                    <Grid item sm={12} md={6}>
+                        <Box sx={{ background: "#191919", padding: 5, borderRadius:"3%"}}>
                             <Typography variant='h1' color= "primary" sx={{fontSize: 30,
                                 margin: 2,
                                 textAlign: 'center',
@@ -51,16 +52,16 @@ const Contact = () => {
                                 Información de contacto
                             </Typography>
                             <Typography variant='ul'>
-                                Teléfonos Fijos:<br/>+57 (5) 8576694 - +57 (5) 8769453<br/><br/>
-                                Celulares:<br/>3025068293 - 3045968342 - 3205869345<br/><br/>
+                                Teléfonos Fijos:<br/>+57 (5) 8576694 <br/>+57 (5) 8769453<br/><br/>
+                                Celulares:<br/>- 3025068293 <br/>- 3045968342 <br/>- 3205869345<br/><br/>
                                 E-mail:<br/>admin@losmisiones.com
                             </Typography>
                         </Box>
                     </Grid>
                     
                     {/*- - Ubicacion - -*/}
-                    <Grid item xs={6}>
-                        <Box sx={{margin: 3}}>
+                    <Grid item sm={12} md={6}>
+                        <Box sx={{ background: "#191919", padding: 5, borderRadius:"3%"}}>
                             <Typography variant='h1' color= "primary" sx={{fontSize: 30, margin: 2, 
                                 textAlign: 'center',
                                 fontFamily: 'monospace',
