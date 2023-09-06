@@ -12,6 +12,7 @@ const informacion = [
     nombre: "Los Misioneros",
     // eslint-disable-next-line no-multi-str
     descripcion:
+    // eslint-disable-next-line no-multi-str
       "En el corazón de Valledupar, te esperamos con los brazos abiertos para brindarte una \
         experiencia única llena de confort y hospitalidad. Nuestro compromiso es hacer que cada momento de \
         tu estadía sea inolvidable, ofreciéndote un ambiente acogedor, instalaciones de calidad y un servicio \
@@ -24,6 +25,7 @@ const informacion = [
     nombre: "Mision",
     // eslint-disable-next-line no-multi-str
     descripcion:
+    // eslint-disable-next-line no-multi-str
       "Nuestra misión es brindar una experiencia de hospedaje excepcional en Valledupar - Cesar,\
          superando las expectativas de nuestros huéspedes en términos de servicio, comodidad y calidad. Nos \
          comprometemos a crear un ambiente acogedor y agradable, donde cada detalle sea cuidadosamente \
@@ -35,6 +37,7 @@ const informacion = [
     nombre: "Vision",
     // eslint-disable-next-line no-multi-str
     descripcion:
+      // eslint-disable-next-line no-multi-str
       "Nuestra visión es convertirnos en el referente de excelencia en la industria \
         hotelera de Valledupar - Cesar, siendo reconocidos por ofrecer una experiencia única y memorable \
         a nuestros huéspedes. Nos esforzamos por ser el destino preferido para aquellos que buscan calidad, \
@@ -111,7 +114,7 @@ export default function About() {
         <Grid container spacing={3}>
           {/*- - Introduccion- -*/}
           <Grid item md={7} sx={12}>
-            <Box sx={{ background: "#191919", padding: 5 }}>
+            <Box sx={{ background: "#191919", padding: 5, borderRadius:'3%' }}>
               <Typography
                 variant="h1"
                 color="primary"
@@ -124,7 +127,7 @@ export default function About() {
               <Typography color="secondary" variant="p">{informacion[0].descripcion}</Typography>
               <Box sx={{justifyContent: 'center',flexGrow: 1, display: { xs: 'flex', md: 'flex' }}}>
                 <img
-                  className="hotel-main rounded-full mt-10 w-4/5"
+                  className="hotel-main rounded-lg mt-10 w-4/5"
                   src={imagen}
                   alt=""
                 />
@@ -141,7 +144,8 @@ export default function About() {
                   sx={{
                     background: "#191919",
                     padding: 2,
-                    marginBottom: 2
+                    marginBottom: 2,
+                    borderRadius:'3%'
                   }}
                 >
                   <Typography

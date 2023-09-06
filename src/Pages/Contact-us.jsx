@@ -14,18 +14,20 @@ const Img = styled("img")({
 
 const Contact = () => {
     return (
-        <>
+        <Box container sx={{marginTop: 15,
+            marginBottom: 5,}}>
             {/*- - Titulo - -*/}
             <Box>
                 <Typography
                 variant="h1"
-                color="primary"
-                component="div"
+                color="secondary"
                 sx={{
                     textAlign: "center",
-                    marginTop: 10,
-                    marginBottom: 5,
                     fontSize: 50,
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    textDecoration: 'none',
+                    marginBottom: 10,
                 }}
                 >
                 Contacto
@@ -34,13 +36,18 @@ const Contact = () => {
             {/*- - Contenido- -*/}
             <Container 
                 maxWidth="md"
-                sx={{ background: "#191919", marginBottom: 5, marginTop: 10}}
+                sx={{ background: "#191919", marginBottom: 5, marginTop: 10, borderRadius:"3%"}}
             >
                 <Grid container spacing={3}>
                     {/*- - Introduccion- -*/}
                     <Grid item xs={6}>
                         <Box sx={{margin: 3}}>
-                            <Typography variant='h1' color= "primary" sx={{fontSize: 30, margin: 2, textAlign: 'center'}}>
+                            <Typography variant='h1' color= "primary" sx={{fontSize: 30,
+                                margin: 2,
+                                textAlign: 'center',
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                textDecoration: 'none'}}>
                                 Información de contacto
                             </Typography>
                             <Typography variant='ul'>
@@ -54,7 +61,11 @@ const Contact = () => {
                     {/*- - Ubicacion - -*/}
                     <Grid item xs={6}>
                         <Box sx={{margin: 3}}>
-                            <Typography variant='h1' color= "primary" sx={{fontSize: 30, margin: 2, textAlign: 'center'}}>
+                            <Typography variant='h1' color= "primary" sx={{fontSize: 30, margin: 2, 
+                                textAlign: 'center',
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                textDecoration: 'none',}}>
                                 Ubicacion
                             </Typography>
                             <Typography variant='p' sx={{marginBottom: 10}}>
@@ -65,7 +76,7 @@ const Contact = () => {
                     </Grid>
                 </Grid>
             </Container>
-        </>
+        </Box>
     )
 }
 

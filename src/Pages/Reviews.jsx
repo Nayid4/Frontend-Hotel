@@ -49,18 +49,20 @@ export default function Review() {
   };
 
   return (
-    <>
+    <Box Container sx={{marginTop: 15, marginBottom: 5,}}>
       {/*- - Titulo - -*/}
       <Box>
         <Typography
           variant="h1"
-          color="primary"
+          color="secondary"
           component="div"
           sx={{
             textAlign: "center",
-            marginTop: 10,
-            marginBottom: 15,
             fontSize: 50,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            textDecoration: 'none',
+            marginBottom: 10
           }}
         >
           Reseñas
@@ -78,6 +80,6 @@ export default function Review() {
           ))}
         </Carousel>
       </Container>
-    </>
+    </Box>
   );
 }
