@@ -1,4 +1,4 @@
-import { Box, Button, Icon, Paper, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Icon, Paper, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 // Estilo de la imagen de la habitacion
 const Img = styled("img")({
-  width: 400,
-  height: 400,
+  width: 450,
+  height: 350,
   objectFit: "cover",
   objectPosition: "center",
 });
@@ -19,11 +19,11 @@ const responsive = {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 1024 },
     items: 1,
-    slidesToSlide: 3,
   },
   desktop: {
     breakpoint: { max: 1024, min: 800 },
     items: 1,
+    
   },
   tablet: {
     breakpoint: { max: 800, min: 464 },
@@ -49,31 +49,20 @@ export default function Habitacion({ bed, auth, activarAlerta, cambiarRoom }) {
   };
 
   return (
-    <Paper
-      key={bed.nombre}
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 2,
-        overflow: "hidden",
-        mt: 5,
-        background: "#191919",
-        transition: "0.2s",
-        "&:hover": { transform: "scale(1.05)" },
-      }}
-    >
-      {/*- - Carrusel de imagenes de la habitacion - -*/}
-      <Box sx={{ width: 400, height: 400 }}>
-        <Carousel showDots={false} responsive={responsive}>
-          {bed.imagen.map((i, index) => (
-            <Img key={index} src={i} alt="" />
-          ))}
-        </Carousel>
-      </Box>
+    
+    <Card sx={{ bgcolor:"#191919",maxWidth:400}}>
+      <Carousel showDots={true} responsive={responsive}>
+        {bed.imagen.map((i, index) => (
+          <Img key={index} src={i} alt="" />
+        ))}
+      </Carousel>
+      <CardContent sx={{minHeight:266}}>
+        {/*- - Nombre se la habitacion - -*/}
+        <Typography gutterBottom variant="h5" component="div">
+          {bed.nombre}
+        </Typography>
 
-      {/*- - Informacion de la habitacion - -*/}
-      <Box sx={{ flexGrow: 1, display: "grid", gap: 1 }}>
-        <Typography variant="h4">{bed.nombre}</Typography>
+        {/*- - Capacidad de personas - -*/}
         <Typography variant="p">
           <Icon>
             <AirlineSeatIndividualSuiteIcon />
@@ -81,21 +70,32 @@ export default function Habitacion({ bed, auth, activarAlerta, cambiarRoom }) {
           {bed.capacidad} Personas
         </Typography>
 
+        {/*- - Caracteristicas - -*/}
         <Typography variant="p" color="primary">
-          {bed.caracteristicas.join(" - ")}
+          <br/>{bed.caracteristicas.join(" - ")}
         </Typography>
 
-        <Typography variant="body1">{bed.descripcion}</Typography>
+        {/*- - Descripcion de la habitacion - -*/}
+        <Typography variant="body2" color="secondary">
+        {bed.descripcion}
+        </Typography>
+      </CardContent>
+
+      
+      <CardActions>
+        
+        {/*- - Precio - -*/}
+        <Box sx={{ pr: 10, color: "white" }}>
+          <p>Precio: ${bed.precio} COP</p>
+        </Box>
+
+        {/*- - Boton de reservar - -*/}
         <Button variant="contained" onClick={handleClick}>
           Reservar
         </Button>
-      </Box>
-
-      {/*- - Precio - -*/}
-      <Box sx={{ mr: 2, color: "white" }}>
-        <p>Precio:</p>
-        <p>$ {bed.precio} COP</p>
-      </Box>
-    </Paper>
+      </CardActions>
+    </Card>
+    
+    
   );
 }

@@ -49,7 +49,7 @@ export default function Review() {
   };
 
   return (
-    <Box Container sx={{marginTop: 15, marginBottom: 5,}}>
+    <Box  sx={{marginTop: 15, marginBottom: 5,}}>
       {/*- - Titulo - -*/}
       <Box>
         <Typography

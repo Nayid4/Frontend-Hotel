@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Habitacion from "../Components/CardHabitacion";
 import axios from "axios";
 import Alert from "../Components/Alert";
@@ -23,6 +23,7 @@ export default function Bed({ cambiarRoom, auth }) {
     });
   };
 
+  // Traemos los datos de las habitaciones de la base de datos
   useEffect(() => {
     const obtenerHabitaciones = async () => {
       const result = await axios({
@@ -35,42 +36,50 @@ export default function Bed({ cambiarRoom, auth }) {
   }, []);
 
   return (
-    <>
+    <Box sx={{marginTop: 15,
+      marginBottom: 5,}}>
       {/*- - Titulo - -*/}
       <Box>
         <Typography
           variant="h1"
-          color="primary"
+          color="secondary"
           component="div"
           sx={{
             textAlign: "center",
-            marginTop: 10,
-            marginBottom: 10,
             fontSize: 50,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            textDecoration: 'none',
+            marginBottom: 10,
           }}
         >
           Habitaciones
         </Typography>
         {/*- - Contenido - -*/}
       </Box>
-
-      <Container maxWidth="md" sx={{ padding: 5, marginBottom: 5 }}>
-        {/*- - Carta de la habitacion - -*/}
-        {habitaciones.map((bed, i) => (
-          <Box key={i}>
-            <Habitacion
-              key={i}
-              bed={bed}
-              auth={auth}
-              activarAlerta={activarAlerta}
-              cambiarRoom={cambiarRoom}
-            />
-          </Box>
-        ))}
-
-        {/*- - Alerta - -*/}
-        <Alert alerta={alerta} setAlerta={setAlerta} />
+      
+      <Container maxWidth="md" >
+        <Grid container spacing={1}>
+          {/*- - Carta de la habitacion - -*/}
+          {habitaciones.map((bed, i) => (
+            <Grid key={i} item md={6} sm={6}>
+                <Box sx={{margin:2}}>
+                  <Habitacion
+                    key={i}
+                    bed={bed}
+                    auth={auth}
+                    activarAlerta={activarAlerta}
+                    cambiarRoom={cambiarRoom}
+                  />
+                </Box>
+            </Grid>
+              
+          ))}
+          {/*- - Alerta - -*/}
+          <Alert alerta={alerta} setAlerta={setAlerta} />
+        </Grid>
       </Container>
-    </>
+      
+    </Box>
   );
 }

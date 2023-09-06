@@ -2,32 +2,15 @@ import {
   Box,
   Container,
   Typography,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Grid,
-  TextField,
-  Checkbox,
-  Link,
   Paper,
   Button,
-  List,
-  ListItem,
-  ListItemText,
-  AppBar,
-  Toolbar,
-  Step,
   Stepper,
-  StepLabel,
-  CssBaseline
+  Step,
+  StepLabel
 } from "@mui/material";
 
 import React, { useState, Fragment, createContext } from "react";
 
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import axios from "axios";
 import Alert from "../Components/Alert";
 import PaymentForm from "../Components/PaymentForm";

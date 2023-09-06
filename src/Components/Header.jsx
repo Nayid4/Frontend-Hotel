@@ -46,11 +46,12 @@ export default function Header({ ListaMenu,auth, cambiarEstadoAuth }) {
   ];
 
   return (
-    <AppBar color="third" sx={{backdropFilter:'blur(5px) saturate(131%)',
-    WebkitBackdropFilter: 'blur(5px) saturate(131%)',
-    backgroundColor: 'rgba(17, 25, 40, 0.62)',
-    borderRadius: '0px',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.125)'
+    <AppBar color="third" sx={{
+      backdropFilter:'blur(5px) saturate(131%)',
+      WebkitBackdropFilter: 'blur(5px) saturate(131%)',
+      backgroundColor: 'rgba(17, 25, 40, 0.62)',
+      borderRadius: '0px',
+      borderBottom: '1px solid rgba(255, 255, 255, 0.125)'
     }}>
       <Container maxWidth="x1" color="inherit"> 
         <Toolbar disableGutters>
