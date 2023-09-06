@@ -5,6 +5,9 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
 
+
+
+
 export default function Review() {
   const [resenas, setResenas] = useState([]);
 

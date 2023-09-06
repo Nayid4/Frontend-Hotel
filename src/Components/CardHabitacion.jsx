@@ -30,7 +30,7 @@ const responsive = {
   },
 };
 
-// Para cargar las imagenes
+// Para cargar las imagenes de las habitaciones
 const habitaciones =  require.context('../assets/images',true);
 
 // Funcion que retorna la carta de la habitacion
@@ -49,7 +49,7 @@ export default function Habitacion({ bed, auth, activarAlerta, cambiarRoom }) {
 
   return (
     
-    <Card sx={{ bgcolor:"#191919",maxWidth:450}}>
+    <Card sx={{ bgcolor:"#191919",maxWidth:{xs:"315px", sm:"350px", md:"450px"}}}>
       <Carousel showDots={true} responsive={responsive}>
         {bed.imagen.map((i, index) => (
           
