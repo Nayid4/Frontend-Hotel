@@ -159,7 +159,7 @@ export default function Sign_up() {
         <Typography component="h1" variant="h5" color="secondary" sx={{fontFamily: 'monospace',
             fontWeight: 700,
             textDecoration: 'none'}}>
-            Registrase
+            Registrarse
           </Typography>
 
         {/*- - Formulario - -*/}

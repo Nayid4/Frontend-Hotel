@@ -93,7 +93,7 @@ export default function Sign_in({ cambiarEstadoAuth }) {
         <Typography component="h1" variant="h5" color="secondary" sx={{fontFamily: 'monospace',
             fontWeight: 700,
             textDecoration: 'none'}}>
-            Iniciar Sesion
+            Iniciar Sesión
           </Typography>
         <Box component="form" noValidate onSubmit={manejarFormulario} sx={{m:2, width:"60%"}}>
           
