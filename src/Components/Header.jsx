@@ -128,7 +128,7 @@ export default function Header({ ListaMenu,auth, cambiarEstadoAuth }) {
                   key={98}
                   className="hover:text-violet-900"
                   sx={{color:"black"}}
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/sign-in")}
                 >
                   Iniciar Sesion
                 </Button>
@@ -138,7 +138,7 @@ export default function Header({ ListaMenu,auth, cambiarEstadoAuth }) {
                   key={97}
                   className="bg-[#580ef6]"
                   variant="contained"
-                  onClick={() => navigate("/registro")}
+                  onClick={() => navigate("/sign-up")}
                   
                 >
                   Registrarse
@@ -175,7 +175,7 @@ export default function Header({ ListaMenu,auth, cambiarEstadoAuth }) {
                   key={96}
                   sx={{transition: "0.2s",
                   "&:hover": { transform: "scale(1.05)"},borderRadius:"100px", mr:2}}
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/sign-in")}
                   variant="outlined"
                 >
                   Iniciar Sesion
@@ -185,7 +185,7 @@ export default function Header({ ListaMenu,auth, cambiarEstadoAuth }) {
                 <Button
                   key={95}
                   variant="contained"
-                  onClick={() => navigate("/registro")}
+                  onClick={() => navigate("/sign-up")}
                   sx={{
                     transition: "0.2s",
                     "&:hover": { transform: "scale(1.05)"},borderRadius:"100px"

@@ -6,13 +6,13 @@ import Footer from "./Components/Footer";
 //paginas import
 import Home from "./Pages/Home";
 import PropertyDetails from "./Pages/PropertyDetails";
-import Registro from "./Pages/Registro";
+import SignUp from "./Pages/Sign-up";
 import Reviews from "./Pages/Reviews";
 import Booking from "./Pages/Booking";
 import Bed from "./Pages/bed-rooms";
 import Contact from "./Pages/Contact-us"
 import About from "./Pages/About-us"
-import Login from "./Pages/Login"
+import SignIn from "./Pages/Sign-in"
 import Profile from "./Pages/Profile-user"
 import BookingUser from "./Pages/Booking-user";
 
@@ -62,8 +62,8 @@ export default function App() {
       <Header ListaMenu={ListaMenu} auth={auth} cambiarEstadoAuth={cambiarEstadoAuth}/> 
       <Routes> 
         <Route path='/' element ={<Home/>} />
-        <Route path='/registro' element ={<Registro/>} />
-        <Route path='/login' element ={<Login cambiarEstadoAuth={cambiarEstadoAuth}/>} />
+        <Route path='/sign-up' element ={<SignUp/>} />
+        <Route path='/sign-in' element ={<SignIn cambiarEstadoAuth={cambiarEstadoAuth}/>} />
         <Route path='/propiedades/:id' element={<PropertyDetails/>}/>
         <Route path='/reviews' element ={<Reviews/>} />
         <Route path='/contact-us' element ={<Contact/>} />
