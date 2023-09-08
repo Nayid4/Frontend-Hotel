@@ -16,23 +16,14 @@ import Alert from "../Components/Alert";
 import PaymentForm from "../Components/PaymentForm";
 import AddressForm from "../Components/AdressForm";
 import InvoiceForm from "../Components/InvoiceForm";
+import BookingForm from "../Components/BookingForm";
 
 
-const steps = ['Datos De Contacto', 'Detalles De Pago', 'Detalles De Orden'];
-export  const userContext = createContext();
+const steps = ['Datos de reserva','Datos De Contacto', 'Detalles De Pago', 'Detalles De Orden'];
+export const reservaContext = createContext();
+export const userContext = createContext();
+export const pagoContext = createContext();
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <InvoiceForm />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
 
 function Booking({ room, auth }) {
   // Estado para mostrar alerta
@@ -42,71 +33,39 @@ function Booking({ room, auth }) {
     texto: "",
   });
 
-  // Estado del obejto que guarda la informacion de la reserva
-  const [datosReserva, setDatosReserva] = useState({});
-
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   //- - - - - - - - - - - - - - - - - - - - - - - - - - - -  -- - - - -- - - - - - - -- - -
 
   // Estados de los datos del formulario de reserva
-  const [adultos, setAdultos] = useState(0);
-  const [ninos, setNinos] = useState(0);
-  const habitacion = room.nombre;
-  const [DateInicio, setDateInicio] = useState(null);
-  const [DateFinal, setDateFinal] = useState(null);
+  const [reservas, setReservas] = useState({
+    fechaIngreso: "",
+    fechaSalida: "",
+    adultos: 0,
+    niños: 0,
+    habitacion: room.nombre+"",
+  });
 
-  // Funciones onChanges
-  const handleChangeAdultos = (event) => {
-    setAdultos(event.target.value);
-  };
-
-  const handleChangeNinos = (event) => {
-    setNinos(event.target.value);
-  };
 
   //- - - - - - - - - - - - - - - - - - - - - - - - - - - -  -- - - - -- - - - - - - -- - -
 
   // Estados del formulario de datos del Cliente
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [contacto, setContacto] = useState({
+    nombre: "",
+    apellido: "",
+    correo: "",
+    telefono: "",
+    }) ;
 
-  // Funciones para obtener los valores de las cajas de texto
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
-  };
   //- - - - - - - - - - - - - - - - - - - - - - - - - - - -  -- - - - -- - - - - - - -- - -
   
   // Estados del formulario de datos de la forma de pago
-
-  // Estado para el campo "Titular"
-  const [cardName, setCardName] = useState("");
-
-  // Estado para el campo "Número de tarjeta"
-  const [cardNumber, setCardNumber] = useState("");
-
-  // Estado para el campo "Fecha De Vencimiento"
-  const [DateVencimiento, setDateVencimiento] = useState(null);
-
-  // Estado para el campo "CVV"
-  const [cvv, setCvv] = useState("");
-
-  // Estado para el checkbox "Estoy de acuerdo con los términos y condiciones"
-  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [pago, setPago] = useState({
+    titular: "",
+    tarjeta: 0,
+    fechaVencimiento: "",
+    cvv: 0
+  });
 
   const titulosReserva = [
     "Fecha De Ingreso:",
@@ -117,36 +76,15 @@ function Booking({ room, auth }) {
   ];
   const cant = [0, 1, 2, 3, 4];
 
-  // Estado de reserva
-  const [reservaHabitacion, setReservaHabitacion] = useState(false);
-
   // Evento del boton  reservar para realizar la reserva
-  const handleClickReservaHabitacion = () => {
+  const guardarInfo = () => {
     const updatedDatosReserva = {
       identificador: auth.userName,
-      reservas: {
-        fechaIngreso: 1623628800001,
-        fechaSalida: 1623628800001,
-        adultos: parseInt(adultos),
-        niños: parseInt(ninos),
-        habitacion: habitacion,
-      },
-      contacto: {
-        nombre: firstName,
-        apellido: lastName,
-        correo: email,
-        telefono: phone,
-      },
-      pago: {
-        titular: cardName,
-        tarjeta: parseInt(cardNumber),
-        fechaVencimiento: 1623628800001,
-        cvv: parseInt(cvv),
-      },
+      reservas,
+      contacto,
+      pago,
       precio: room.precio,
     };
-
-    setDatosReserva(updatedDatosReserva);
 
     try {
       const realizarReserva = async () => {
@@ -173,14 +111,18 @@ function Booking({ room, auth }) {
         texto: "Error al realizar la reserva",
       });
     }
-
-    setReservaHabitacion(true);
   };
 
 
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
+    console.log(reservas);
+    console.log(contacto);
+    console.log(pago);
+    if(activeStep === steps.length - 1){
+      guardarInfo();
+    }
     setActiveStep(activeStep + 1);
   };
 
@@ -215,7 +157,17 @@ function Booking({ room, auth }) {
             </React.Fragment>
           ) : (
             <Fragment>
-              {getStepContent(activeStep)}
+              {/*getStepContent(activeStep)*/}
+              {activeStep === 0 ? <reservaContext.Provider value={{reservas, setReservas}}>
+                <BookingForm />
+              </reservaContext.Provider> :
+              activeStep === 1 ? <userContext.Provider value={{contacto, setContacto}}>
+                <AddressForm />
+              </userContext.Provider> : 
+              activeStep === 2 ? <pagoContext.Provider value={{pago, setPago}}>
+                <PaymentForm />
+              </pagoContext.Provider> : 
+              activeStep === 3 ? <InvoiceForm /> : null}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

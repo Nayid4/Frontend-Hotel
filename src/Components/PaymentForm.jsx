@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import {Typography, 
     Grid, 
     TextField, 
@@ -7,29 +7,22 @@ import {Typography,
     from '@mui/material';
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from 'dayjs';
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { pagoContext } from "../Pages/Booking";
 
 export default function PaymentForm() {
 
     const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
     // Estados del formulario de datos de la forma de pago
-
-    // Estado para el campo "Titular"
-    const [cardName, setCardName] = useState("");
-
-    // Estado para el campo "Número de tarjeta"
-    const [cardNumber, setCardNumber] = useState("");
-
-    // Estado para el campo "Fecha De Vencimiento"
-    const [DateVencimiento, setDateVencimiento] = useState(null);
-
-    // Estado para el campo "CVV"
-    const [cvv, setCvv] = useState("");
-
-    // Estado para el checkbox "Estoy de acuerdo con los términos y condiciones"
-    const [agreeTerms, setAgreeTerms] = useState(false);
-
+    const {pago, setPago} = useContext(pagoContext);
+    
+    // Para capturar la informacion del usuario
+    const handleOnChange = (evento) => {
+      setPago({ ...pago, [evento.target.name]: evento.target.value });
+    };
 
   return (
     <React.Fragment>
@@ -44,12 +37,12 @@ export default function PaymentForm() {
         <TextField
             required
             id="cardName"
+            name="titular"
             label="Titular"
             fullWidth
             autoComplete="cc-name"
             variant="standard"
-            value={cardName}
-            onChange={(e) => setCardName(e.target.value)}
+            onChange={handleOnChange}
         />
         </Grid>
 
@@ -58,31 +51,36 @@ export default function PaymentForm() {
         <TextField
             required
             id="cardNumber"
+            name="tarjeta"
             label="Número de tarjeta"
             fullWidth
             autoComplete="cc-number"
             variant="standard"
-            value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
+            onChange={handleOnChange}
         />
         </Grid>
 
         {/*- - Fecha de vencimiento - -*/}
         <Grid item xs={12} md={6}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer
+          components={[
+            'DatePicker',
+            'MobileDatePicker',
+            'DesktopDatePicker',
+            'StaticDatePicker',
+          ]}
+        >
+          <DemoItem>
             <DatePicker
-            label="Fecha De Vencimiento"
-            value={DateVencimiento}
-            onChange={(newDate) => setDateVencimiento(newDate)}
-            renderInput={(props) => (
-                <TextField
-                required
-                variant="standard"
-                fullWidth
-                {...props}
-                />
-            )}
-            />
+                label="Fecha De Vencimiento"
+                name = "fechaVencimiento"
+                defaultValue={dayjs('2023-09-17')}
+                onChange={(newDate) => setPago({...pago,fechaVencimiento:newDate.toDate()})}
+              />
+          </DemoItem>
+        </DemoContainer>
+            
         </LocalizationProvider>
         </Grid>
 
@@ -92,12 +90,12 @@ export default function PaymentForm() {
             required
             id="cvv"
             label="CVV"
+            name="cvv"
             helperText="Últimos tres dígitos en la tira de firma"
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
-            value={cvv}
-            onChange={(e) => setCvv(e.target.value)}
+            onChange={handleOnChange}
         />
         </Grid>
 

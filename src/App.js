@@ -15,6 +15,7 @@ import About from "./Pages/About-us"
 import SignIn from "./Pages/Sign-in"
 import Profile from "./Pages/Profile-user"
 import BookingUser from "./Pages/Booking-user";
+import { Box, Container } from "@mui/material";
 
 export default function App() {
 
@@ -58,7 +59,7 @@ export default function App() {
   };
 
   return (
-    <div>
+    <Box>
       <Header ListaMenu={ListaMenu} auth={auth} cambiarEstadoAuth={cambiarEstadoAuth}/> 
       <Routes> 
         <Route path='/' element ={<Home/>} />
@@ -74,6 +75,6 @@ export default function App() {
         <Route path='/your-booking' element ={<BookingUser/>} />
       </Routes>
       <Footer/>
-    </div>
+    </Box>
   );
 }

@@ -1,8 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  height: 100%;
+}
+
 body {
   background-color: #1A1C22;
+  display:flex;
+  flex-direction: column;
+  min-width: 100%;
 }
 
 /* scrollbar vertical */
@@ -23,6 +31,10 @@ body {
   background-color: #3d3a50; /* color de la pista */
 }
 
+/* Cambia el color de la línea del borde en hover */
+.custom-textfield:hover .MuiInput-underline:before {
+  border-bottom: 2px solid white !important;
+}
 
 * {
   padding: 0;

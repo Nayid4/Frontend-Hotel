@@ -1,41 +1,27 @@
-import * as React from 'react';
+import React,{ Fragment, useContext, useState} from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Container } from '@mui/material';
+import { userContext } from '../Pages/Booking';
 
 export default function AddressForm() {
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - -  -- - - - -- - - - - - - -- - -
 
-  // Estados del formulario de datos del Cliente
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [phone, setPhone] = React.useState("");
+    // Llamamos el estado que controla los datos del usuario
+    const { contacto, setContacto } = useContext(userContext);
 
-  // Funciones para obtener los valores de las cajas de texto
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
+  // Para capturar la informacion del usuario
+  const handleOnChange = (evento) => {
+    setContacto({ ...contacto, [evento.target.name]: evento.target.value });
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
         {/*- - - - - - - - - Formulario de Cliente - - - - - - - - -*/}
-        <Container sx={{height: 250}}>
+        <Container >
             {/*- - Titulo de datos de contacto - -*/}
             <Typography variant="h6" sx={{color: "black"}} gutterBottom>
                 Datos De Contacto
@@ -47,12 +33,12 @@ export default function AddressForm() {
                     <TextField
                         required
                         id="firstName"
-                        name="firstName"
+                        name="nombre"
                         label="Nombre"
                         fullWidth
                         autoComplete="given-name"
                         variant="standard"
-                        onChange={handleFirstNameChange}
+                        onChange={handleOnChange}
                     />
                 </Grid>
 
@@ -61,12 +47,12 @@ export default function AddressForm() {
                     <TextField
                         required
                         id="lastName"
-                        name="lastName"
+                        name="apellido"
                         label="Apellido"
                         fullWidth
                         autoComplete="family-name"
                         variant="standard"
-                        onChange={handleLastNameChange}
+                        onChange={handleOnChange}
                     />
                 </Grid>
 
@@ -75,11 +61,11 @@ export default function AddressForm() {
                     <TextField
                         required
                         id="email"
-                        name="email"
+                        name="correo"
                         label="Correo"
                         fullWidth
                         variant="standard"
-                        onChange={handleEmailChange}
+                        onChange={handleOnChange}
                     />
                 </Grid>
 
@@ -88,22 +74,23 @@ export default function AddressForm() {
                     <TextField
                         required
                         id="phone"
-                        name="phone"
+                        name="telefono"
                         label="Telefono"
                         fullWidth
                         variant="standard"
-                        onChange={handlePhoneChange}
+                        onChange={handleOnChange}
                     />
                 </Grid>
 
                 <Grid item xs={12}>
                     <FormControlLabel
-                    control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+                    sx={{ color: "black" }}
+                    control={<Checkbox color="primary" name="saveAddress" value="yes" />}
                     label="Usar esta dirección para detalles de pago"
                     />
                 </Grid>
             </Grid>
         </Container>
-    </React.Fragment>
+    </Fragment>
   );
 }

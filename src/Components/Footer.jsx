@@ -5,7 +5,10 @@ import { Box } from "@mui/material";
 
 export default function Footer() {
   return (
-    <Box component={"footer"}  sx={{bottom:0,justifyContent:"center", width:"100%"}}>
+    <Box component={"footer"} sx={{justifyContent:"center", 
+    width:"100%", 
+    bottom:"0px", 
+    left:"0px"}}>
       <Typography
         sx={{ padding: 3, boxShadow:"0px -2px 4px rgba(88, 14, 246, 0.25)" }}
         variant="body2"
