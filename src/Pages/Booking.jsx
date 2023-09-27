@@ -33,8 +33,6 @@ function Booking({ room, auth }) {
     texto: "",
   });
 
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
   //- - - - - - - - - - - - - - - - - - - - - - - - - - - -  -- - - - -- - - - - - - -- - -
 
   // Estados de los datos del formulario de reserva

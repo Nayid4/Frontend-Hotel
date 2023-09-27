@@ -6,9 +6,6 @@ import "react-multi-carousel/lib/styles.css";
 import Card from "../Components/Card";
 import axios from "axios";
 
-// Para cargar las imagenes de los personas
-const personas =  require.context('../assets/images',true);
-
 // Lista de objetos con informacion esencial del hotel
 const informacion = [
   {

@@ -1,4 +1,4 @@
-import {useRef, useEffect} from "react";
+import {useRef} from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -9,7 +9,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import "../index.css";
 import axios from "axios";
-import { Button, Container, Link, Snackbar, Typography } from "@mui/material";
+import { Button, Container, Link, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Alert from "../Components/Alert";
 

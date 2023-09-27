@@ -62,26 +62,26 @@ export default function PaymentForm() {
 
         {/*- - Fecha de vencimiento - -*/}
         <Grid item xs={12} md={6}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer
-          components={[
-            'DatePicker',
-            'MobileDatePicker',
-            'DesktopDatePicker',
-            'StaticDatePicker',
-          ]}
-        >
-          <DemoItem>
-            <DatePicker
-                label="Fecha De Vencimiento"
-                name = "fechaVencimiento"
-                defaultValue={dayjs('2023-09-17')}
-                onChange={(newDate) => setPago({...pago,fechaVencimiento:newDate.toDate()})}
-              />
-          </DemoItem>
-        </DemoContainer>
-            
-        </LocalizationProvider>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer
+            components={[
+              'DatePicker',
+              'MobileDatePicker',
+              'DesktopDatePicker',
+              'StaticDatePicker',
+            ]}
+          >
+            <DemoItem>
+              <DatePicker
+                  label="Fecha De Vencimiento"
+                  name = "fechaVencimiento"
+                  defaultValue={dayjs('2023-09-17')}
+                  onChange={(newDate) => setPago({...pago,fechaVencimiento:newDate.toDate()})}
+                />
+            </DemoItem>
+          </DemoContainer>
+              
+          </LocalizationProvider>
         </Grid>
 
         {/*- - CVV - -*/}

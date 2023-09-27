@@ -7,7 +7,7 @@ import imagen from "../assets/images/logo.png";
 import { useState } from "react";
 import "../index.css";
 import axios from "axios";
-import { Button, Card, Container, Link, Typography } from "@mui/material";
+import { Button, Container, Link, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Alert from "../Components/Alert";
 
