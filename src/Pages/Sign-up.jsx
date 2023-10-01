@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import { useRef } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -40,15 +40,13 @@ export default function Sign_up() {
 
     const data = new FormData(evento.currentTarget);
 
-    console.log("Nombre de usuario: "+data.get('username'));
-    console.log("Correo: "+data.get('email'));
-    console.log("Contraseña: "+data.get('password'));
-    console.log("Terminos: "+data.get('check'));
+    console.log("Nombre de usuario: " + data.get("username"));
+    console.log("Correo: " + data.get("email"));
+    console.log("Contraseña: " + data.get("password"));
+    console.log("Terminos: " + data.get("check"));
 
-    
-    
     // Condicional para saber si se escribio un nombre de usuario
-    if (data.get('username') === "") {
+    if (data.get("username") === "") {
       setAlerta({
         open: true,
         tipo: "info",
@@ -58,7 +56,7 @@ export default function Sign_up() {
     }
 
     // Condicional para saber si se escribio algo en correo
-    if (data.get('email') === "") {
+    if (data.get("email") === "") {
       setAlerta({
         open: true,
         tipo: "info",
@@ -68,7 +66,7 @@ export default function Sign_up() {
     }
 
     // Condicional para saber si se escribio una contraseña
-    if (data.get('password') === "") {
+    if (data.get("password") === "") {
       setAlerta({
         open: true,
         tipo: "info",
@@ -89,8 +87,7 @@ export default function Sign_up() {
     }
 
     //Condicional para verifical que el email este correcto
-    if (!emailValidation(data.get('email'))) {
-      
+    if (!emailValidation(data.get("email"))) {
       setAlerta({
         open: true,
         tipo: "warning",
@@ -101,17 +98,15 @@ export default function Sign_up() {
 
     // Capturamos la informacion en un objeto
     const usuario = {
-      nombreUsuario: data.get('username'),
-      correo: data.get('email'),
-      password: data.get('password'),
+      nombreUsuario: data.get("username"),
+      correo: data.get("email"),
+      password: data.get("password"),
     };
-
-    console.log("Info: "+usuario);
 
     try {
       const respuesta = await axios({
         method: "POST",
-        url: "http://localhost:4000/api/registrarse  ",
+        url: "http://localhost:4000/api/registrarse",
         data: usuario,
       });
       console.log("res:", respuesta.data);
@@ -124,9 +119,7 @@ export default function Sign_up() {
       });
 
       navigate("/sign-in");
-
     } catch (error) {
-      console.error("Error en la solicitud POST:", error.message);
       // Se cambia el estado de la alerta
       setAlerta({
         open: true,
@@ -134,7 +127,6 @@ export default function Sign_up() {
         texto: "Usuario Registrado, Intente con otros datos.",
       });
     }
-    // console.log(usuario);
   };
 
   return (
@@ -146,37 +138,57 @@ export default function Sign_up() {
           flexDirection: "column",
           alignItems: "center",
           backgroundColor: "#191919",
-          mt:20,
-          mb:10
+          mt: 20,
+          mb: 10,
         }}
       >
         {/*- - Logo de la pagina - - */}
-        <Box sx={{m:1}}>
-          <img  src={imagen} alt="" />
+        <Box sx={{ m: 1 }}>
+          <img src={imagen} alt="" />
         </Box>
 
         {/*- - Titulo de registro - -*/}
-        <Typography component="h1" variant="h5" color="secondary" sx={{fontFamily: 'monospace',
+        <Typography
+          component="h1"
+          variant="h5"
+          color="secondary"
+          sx={{
+            fontFamily: "monospace",
             fontWeight: 700,
-            textDecoration: 'none'}}>
-            Registrarse
-          </Typography>
+            textDecoration: "none",
+          }}
+        >
+          Registrarse
+        </Typography>
 
         {/*- - Formulario - -*/}
-        <Box component="form" noValidate onSubmit={manejarFormulario} sx={{m:2, width:"60%"}}>
-          
+        <Box
+          component="form"
+          noValidate
+          onSubmit={manejarFormulario}
+          sx={{ m: 2, width: "60%" }}
+        >
           {/*- - Nombre de usuario - -*/}
-          <Box sx={{ display: "flex", alignItems: "flex-end"}}>
-            <AccountCircle sx={{ color: "primary", marginRight: "1px", marginBottom: "0.5px" }} />
+          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <AccountCircle
+              sx={{
+                color: "primary",
+                marginRight: "1px",
+                marginBottom: "0.5px",
+              }}
+            />
             <TextField
-              sx={{"& .MuiInput-underline:after": {
-                borderBottomColor: "white", // Cambia el color de la línea después de hacer clic
-              },
-              "& .MuiInput-underline:before": {
-                borderBottomColor: "white", // Cambia el color de la línea antes de hacer clic
-              },"&:hover .MuiInput-underline": {
-                borderBottomColor: "white", // Cambia el color de la línea en hover
-              },}}
+              sx={{
+                "& .MuiInput-underline:after": {
+                  borderBottomColor: "white", // Cambia el color de la línea después de hacer clic
+                },
+                "& .MuiInput-underline:before": {
+                  borderBottomColor: "white", // Cambia el color de la línea antes de hacer clic
+                },
+                "&:hover .MuiInput-underline": {
+                  borderBottomColor: "white", // Cambia el color de la línea en hover
+                },
+              }}
               name="username"
               id="standard-basic"
               variant="standard"
@@ -191,16 +203,25 @@ export default function Sign_up() {
 
           {/*- - Correo del usuario - -*/}
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <EmailIcon sx={{ color: "primary", marginRight: "1px", marginBottom: "0.5px" }} />
+            <EmailIcon
+              sx={{
+                color: "primary",
+                marginRight: "1px",
+                marginBottom: "0.5px",
+              }}
+            />
             <TextField
-              sx={{"& .MuiInput-underline:after": {
-                borderBottomColor: "white", // Cambia el color de la línea después de hacer clic
-              },
-              "& .MuiInput-underline:before": {
-                borderBottomColor: "white", // Cambia el color de la línea antes de hacer clic
-              },"&:hover .MuiInput-underline": {
-                borderBottomColor: "white", // Cambia el color de la línea en hover
-              },}}
+              sx={{
+                "& .MuiInput-underline:after": {
+                  borderBottomColor: "white", // Cambia el color de la línea después de hacer clic
+                },
+                "& .MuiInput-underline:before": {
+                  borderBottomColor: "white", // Cambia el color de la línea antes de hacer clic
+                },
+                "&:hover .MuiInput-underline": {
+                  borderBottomColor: "white", // Cambia el color de la línea en hover
+                },
+              }}
               margin="normal"
               required
               fullWidth
@@ -215,17 +236,26 @@ export default function Sign_up() {
           </Box>
 
           {/*- - Contraseña - -*/}
-          <Box  sx={{ display: "flex", alignItems: "flex-end", mb:1 }}>
-            <LockIcon sx={{ color: "primary", marginRight: "1px", marginBottom: "0.5px" }} />
+          <Box sx={{ display: "flex", alignItems: "flex-end", mb: 1 }}>
+            <LockIcon
+              sx={{
+                color: "primary",
+                marginRight: "1px",
+                marginBottom: "0.5px",
+              }}
+            />
             <TextField
-              sx={{"& .MuiInput-underline:after": {
-                borderBottomColor: "white", // Cambia el color de la línea después de hacer clic
-              },
-              "& .MuiInput-underline:before": {
-                borderBottomColor: "white", // Cambia el color de la línea antes de hacer clic
-              },"&:hover .MuiInput-underline": {
-                borderBottomColor: "white", // Cambia el color de la línea en hover
-              },}}
+              sx={{
+                "& .MuiInput-underline:after": {
+                  borderBottomColor: "white", // Cambia el color de la línea después de hacer clic
+                },
+                "& .MuiInput-underline:before": {
+                  borderBottomColor: "white", // Cambia el color de la línea antes de hacer clic
+                },
+                "&:hover .MuiInput-underline": {
+                  borderBottomColor: "white", // Cambia el color de la línea en hover
+                },
+              }}
               name="password"
               size="normal"
               variant="standard"
@@ -239,9 +269,20 @@ export default function Sign_up() {
           </Box>
 
           {/*- - Mensaje para recuperar contraseña - -*/}
-          <Box sx={{mb:1}}>
-            <Typography variant="body2" color="secondary" sx={{ fontSize: "14px", cursor: "pointer" }}>
-            <Checkbox {...label} inputRef={checkboxRef} required name="check" size="normal" />He leído y acepto los términos y condiciones
+          <Box sx={{ mb: 1 }}>
+            <Typography
+              variant="body2"
+              color="secondary"
+              sx={{ fontSize: "14px", cursor: "pointer" }}
+            >
+              <Checkbox
+                {...label}
+                inputRef={checkboxRef}
+                required
+                name="check"
+                size="normal"
+              />
+              He leído y acepto los términos y condiciones
             </Typography>
           </Box>
 
@@ -249,11 +290,15 @@ export default function Sign_up() {
           <Alert alerta={alerta} setAlerta={setAlerta} />
 
           {/*- - Boton del formulario - -*/}
-          <Box display="flex" justifyContent="center" sx={{width:"100%", mb:1}}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            sx={{ width: "100%", mb: 1 }}
+          >
             <Button
               variant="contained"
               color="primary"
-              sx={{ borderRadius: "12px", margin: "1px", width:"100%"}}
+              sx={{ borderRadius: "12px", margin: "1px", width: "100%" }}
               type="submit"
             >
               Registrar
@@ -261,7 +306,7 @@ export default function Sign_up() {
           </Box>
 
           {/*- - Mensaje para ir a crear una cuenta - -*/}
-          <Box display="flex" justifyContent="center" margin="2px" >
+          <Box display="flex" justifyContent="center" margin="2px">
             <Typography
               variant="body2"
               color="secondary"
